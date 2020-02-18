@@ -5,8 +5,11 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart';
 import 'config.dart';
 import 'package:net_app/widgets/dialog.dart';
+import 'session.dart';
 
 class Api {
+  final _session = Session();
+
   Future<bool> newUser(
     BuildContext context, {
     @required String names,
@@ -27,8 +30,7 @@ class Api {
       final parsed = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
-        final names = parsed['names'] as String;
-        Dialog.alert(context, title: "Bienvenido $names");
+        Dialog.alert(context, title: "Bienvenido a .NET!");
         return true;
       } else if (response.statusCode == 500) {
         throw PlatformException(code: "500", message: parsed['message']);
@@ -59,6 +61,10 @@ class Api {
       if (response.statusCode == 200) {
         final token = parsed['token'] as String;
         print("$token");
+
+        //save token
+        await _session.set(token);
+
         return true;
       } else if (response.statusCode == 500) {
         throw PlatformException(code: "500", message: parsed['message']);
@@ -68,6 +74,45 @@ class Api {
       Dialog.alert(context,
           title: 'Ups algo salió mal!', message: "${e.message}");
       return false;
+    }
+  }
+
+  Future<dynamic> getUserInfo(BuildContext context, String token) async {
+    try {
+      final url = "${Config.url}/user-profile";
+      final response = await http.get(
+        url,
+        headers: {"Authorization": "Bearer $token"},
+      );
+
+      final parsed = jsonDecode(response.body);
+
+      if (response.statusCode == 200) {
+        return parsed;
+      } else if(response.statusCode == 500) {
+        throw PlatformException(code: "500", message: parsed['message']);
+      }
+        
+      throw PlatformException(code: "201", message: "error /user-profile");
+    } on PlatformException catch (e) {
+      Dialog.alert(context, title: "ERROR", message: e.message);
+      return null;
+    }
+  }
+
+  Future<String> getAccessToken() async {
+    try {
+      final result = await _session.get();
+      if (result != null) {
+        final token = result['token'] as String;
+        await _session.set(token);
+        return token;
+      }
+      return null;
+
+    } on PlatformException catch(e) {
+      print("Error ${e.code}: ${e.message}");
+      return 'Hola';
     }
   }
 }

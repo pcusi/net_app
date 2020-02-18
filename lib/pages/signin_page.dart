@@ -37,7 +37,7 @@ class _SignInPageState extends State<SignInPage> {
       });
 
       if (isOk) {
-        print("logged");
+        Navigator.pushNamedAndRemoveUntil(context, '/splash', (_) => false);
       }
     }
   }

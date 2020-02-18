@@ -14,21 +14,34 @@ class _SignUpPageState extends State<SignUpPage> {
   final _api = Api();
   var _names = '', _surnames = '', _username = '', _password = '';
 
+  var _isFetching = false;
+
   @override
   void initState() {
     super.initState();
   }
 
   _submit() async {
+    if (_isFetching) return;
+
     final isValid = _formKey.currentState.validate();
     if (isValid) {
+      setState(() {
+        _isFetching = true;
+      });
+
       final isOk = await _api.newUser(context,
           names: _names,
           surnames: _surnames,
           username: _username,
           password: _password);
+
+      setState(() {
+        _isFetching = false;
+      });
+
       if (isOk) {
-        Navigator.pushNamed(context, '/signin');
+        print("Registrado");
       }
     }
   }
@@ -36,6 +49,7 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    
 
     return Scaffold(
       resizeToAvoidBottomInset: true,
@@ -196,6 +210,14 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                       ),
                     ),
+                    _isFetching
+                        ? Center(
+                            child: CircularProgressIndicator(
+                              backgroundColor: Colors.blue,
+                              value: 5
+                            ),
+                          )
+                        : Container(),
                   ],
                 ),
               )
