@@ -61,7 +61,6 @@ class Api {
 
       if (response.statusCode == 200) {
         final token = parsed['token'] as String;
-        print("$token");
 
         //save token
         await _session.set(token);
@@ -127,7 +126,6 @@ class Api {
       if (response.statusCode == 200) {
         final parsed = jsonDecode(response.body);
 
-        print(parsed);
 
         final list = parsed['publications'] as List;
 

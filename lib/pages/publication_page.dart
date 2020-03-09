@@ -41,11 +41,12 @@ class _PublicationPageState extends State<PublicationPage> {
         future: getPublications(),
         builder: (content, snapshot) {
           if (snapshot.hasData) {
+
             return CardPublication(
               width: size.width * .8,
               height: 125,
-              text: snapshot.data[0].user.names,
-              subtext: snapshot.data[0].createdAt,
+              text: Text('${snapshot.data[0].user.names} ${snapshot.data[0].user.surnames}'),
+              subtext: snapshot.data[0].createdAt.toString(),
               description: snapshot.data[0].description,
             );
           } else {

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class CardPublication extends StatefulWidget {
   final double width;
   final double height;
-  final String text;
+  final Text text;
   final String subtext;
   final String description;
   final String image;
@@ -56,7 +56,7 @@ class _CardPublicationState extends State<CardPublication> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text(widget.text),
+                        widget.text,
                         Text(widget.subtext),
                       ],
                     ),

@@ -24,8 +24,8 @@ class _MainPageState extends State<MainPage> {
     _me = MeUser.of(context);
 
     final size = MediaQuery.of(context).size;
-    return Material(
-      child: Container(
+    return Scaffold(
+        body: Container(
           width: size.width,
           height: size.height + 150,
           decoration: BoxDecoration(
@@ -97,7 +97,7 @@ class _MainPageState extends State<MainPage> {
                       style: TextStyle(
                         color: Colors.white,
                         fontFamily: 'RobotoCondensed',
-                        fontSize: 14,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -132,7 +132,7 @@ class _MainPageState extends State<MainPage> {
                             textAlign: TextAlign.start,
                             style: TextStyle(
                               color: Color(0xff000000),
-                              fontSize: 14.0,
+                              fontSize: 16.0,
                               fontFamily: 'RobotoCondensed',
                             ),
                           ),
@@ -183,7 +183,21 @@ class _MainPageState extends State<MainPage> {
                 ),
               ),
             ],
-          )),
-    );
+          ),
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: Color(0xffDAA520),
+          selectedItemColor: Colors.white,
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.people),
+              title: Text('Personas'),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings),
+              title: Text('Configuración'),
+            ),
+          ],
+        ));
   }
 }
