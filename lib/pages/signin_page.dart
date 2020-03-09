@@ -37,7 +37,7 @@ class _SignInPageState extends State<SignInPage> {
       });
 
       if (isOk) {
-        Navigator.pushNamedAndRemoveUntil(context, '/splash', (_) => false);
+        Navigator.pushNamedAndRemoveUntil(context, '/main', (_) => false);
       }
     }
   }

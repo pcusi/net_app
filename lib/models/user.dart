@@ -17,14 +17,4 @@ class User {
     );
   }
 
-  Map<String, dynamic> toJson() {
-  
-    return {
-      "_id": this.id,
-      "names": this.names,
-      "surnames": this.surnames,
-    };
-    
-  }
-
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:net_app/api/session.dart';
+import 'package:net_app/pages/publication_page.dart';
+import 'package:net_app/widgets/divider_card.dart';
 import '../providers/me_user.dart';
 
 class MainPage extends StatefulWidget {
@@ -12,9 +14,9 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   MeUser _me;
 
-  _leaveAcc() async {
-    Session s = Session();
-    await s.clear();
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override
@@ -69,9 +71,13 @@ class _MainPageState extends State<MainPage> {
                         Padding(
                           padding: const EdgeInsets.only(right: 32.0),
                           child: GestureDetector(
-                            onTap: () {
-                              _leaveAcc();
-                              Navigator.pushNamedAndRemoveUntil(context, '/login', (_) => false);
+                            onTap: () async {
+                              Navigator.pop(context);
+
+                              Session session = new Session();
+                              await session.clear();
+
+                              Navigator.pushNamed(context, '/login');
                             },
                             child: Icon(
                               Icons.power_settings_new,
@@ -99,20 +105,66 @@ class _MainPageState extends State<MainPage> {
                   SizedBox(
                     height: 34,
                   ),
-                  Container(
-                    width: size.width * .8,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(15),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.black,
-                            blurRadius: 1,
-                            offset: Offset(0.25, 4),
-                            spreadRadius: 0)
-                      ],
+                  GestureDetector(
+                    onTap: () {
+                      print("ESTO ESTÁ FUNCIONANDO!");
+                    },
+                    child: Container(
+                      width: size.width * .8,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(15),
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.black,
+                              blurRadius: 1,
+                              offset: Offset(0.25, 4),
+                              spreadRadius: 0)
+                        ],
+                      ),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 16.0),
+                          child: Text(
+                            '¿Que publicarás hoy?',
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                              color: Color(0xff000000),
+                              fontSize: 14.0,
+                              fontFamily: 'RobotoCondensed',
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
+                  ),
+                  SizedBox(
+                    height: 50,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        'LO DE HOY',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      DividerCard(
+                        width: size.width * .8,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    child: PublicationPage(),
                   )
                 ],
               ),

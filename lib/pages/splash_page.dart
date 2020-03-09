@@ -26,16 +26,13 @@ class _SplashPageState extends State<SplashPage> {
     if (token != null) {
 
       final result = await _api.getUserInfo(context, token);
-      print(result.toString());
       final user = User.fromJson(result);
-
-      print("user to json: ${user.toJson()}");
 
       _me.data = user;
       
-      Navigator.pushNamed(context, "/main");
+      Navigator.pushReplacementNamed(context, "/main");
     } else {
-      Navigator.pushNamed(context, "/login");
+      Navigator.pushReplacementNamed(context, "/login");
     }
   }
 

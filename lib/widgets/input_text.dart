@@ -7,7 +7,7 @@ class InputText extends StatefulWidget {
   final TextInputType type;
 
   const InputText(
-      {Key key, @required this.label, this.validator, this.isSecure, this.type})
+      {Key key, this.label, this.validator, this.isSecure, this.type})
       : super(key: key);
 
   @override
