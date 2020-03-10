@@ -1,7 +1,7 @@
 import 'dart:core';
 
 import 'package:net_app/models/user.dart';
-import 'package:simple_moment/simple_moment.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class Publication {
   final String description;
@@ -12,12 +12,14 @@ class Publication {
   Publication({this.description, this.user, this.createdAt, this.image});
 
   factory Publication.fromJson(Map<String, dynamic> json) {
-    final moment = Moment.parse(json['created_at']);
+    final moment = DateTime.parse(json['created_at']);
+
+    final createdAt = timeago.format(moment.toLocal(), locale: 'es');
 
     return Publication(
         description: json['description'],
         user: User.fromJson(json['user']),
-        createdAt: moment.fromNow(),
+        createdAt: createdAt,
         image: json['image']);
   }
 }

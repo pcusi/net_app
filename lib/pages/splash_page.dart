@@ -32,7 +32,9 @@ class _SplashPageState extends State<SplashPage> {
       
       Navigator.pushReplacementNamed(context, "/main");
     } else {
-      Navigator.pushReplacementNamed(context, "/login");
+      if (_me.data == null) {
+        Navigator.pushReplacementNamed(context, "/login");
+      }
     }
   }
 

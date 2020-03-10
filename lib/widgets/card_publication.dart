@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:net_app/widgets/divider_card.dart';
 
 class CardPublication extends StatefulWidget {
   final double width;
@@ -7,6 +8,7 @@ class CardPublication extends StatefulWidget {
   final String subtext;
   final String description;
   final String image;
+  final double radius;
 
   const CardPublication({
     Key key,
@@ -16,6 +18,7 @@ class CardPublication extends StatefulWidget {
     this.subtext,
     this.description,
     this.image,
+    this.radius,
   }) : super(key: key);
 
   @override
@@ -29,14 +32,15 @@ class _CardPublicationState extends State<CardPublication> {
       width: widget.width,
       height: widget.height,
       decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: [
-            BoxShadow(
-              offset: Offset(0, 1),
-              color: Colors.black12,
-            )
-          ]),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(widget.radius),
+        boxShadow: [
+          BoxShadow(
+            offset: Offset(0, 1),
+            color: Colors.black12,
+          )
+        ],
+      ),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Padding(
@@ -48,8 +52,7 @@ class _CardPublicationState extends State<CardPublication> {
                 children: <Widget>[
                   Align(
                     alignment: Alignment.topLeft,
-                    child: CircleAvatar(
-                    ),
+                    child: CircleAvatar(),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 16.0, right: 16.0),
@@ -57,7 +60,13 @@ class _CardPublicationState extends State<CardPublication> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         widget.text,
-                        Text(widget.subtext),
+                        Text(
+                          widget.subtext,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey,
+                          ),
+                        ),
                       ],
                     ),
                   )
@@ -80,10 +89,33 @@ class _CardPublicationState extends State<CardPublication> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Divider(
-                        height: 10,
-                        color: Color(0xffDAA520),
-                        thickness: 4.0,
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      DividerCard(width: 300),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                        child: GestureDetector(
+                          child: Row(
+                            children: <Widget>[
+                              Icon(
+                                Icons.message,
+                                size: 15,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 8.0),
+                                child: Text(
+                                  'Comentar publicación',
+                                  style: TextStyle(
+                                    fontFamily: 'RobotoCondensed',
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
                       )
                     ],
                   )
