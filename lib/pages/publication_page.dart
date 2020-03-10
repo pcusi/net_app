@@ -37,27 +37,44 @@ class _PublicationPageState extends State<PublicationPage> {
     final size = MediaQuery.of(context).size;
 
     return Material(
-      child: FutureBuilder<List<Publication>>(
-        future: getPublications(),
-        builder: (content, snapshot) {
-          if (snapshot.hasData) {
-            return CardPublication(
-              width: size.width * .8,
-              height: size.height / 4.7,
-              radius: 15.0,
-              text: Text(
-                '${snapshot.data[0].user.names} ${snapshot.data[0].user.surnames}',
-                style: TextStyle(fontWeight: FontWeight.bold, fontFamily: 'RobotoCondensed')
-              ),
-              subtext: snapshot.data[0].createdAt.toString(),
-              description: snapshot.data[0].description,
-            );
-          } else {
-            return CupertinoActivityIndicator(
-              radius: 15,
-            );
-          }
-        },
+      color: Colors.transparent,
+      child: SingleChildScrollView(
+        child: FutureBuilder<List<Publication>>(
+          future: getPublications(),
+          builder: (content, snapshot) {
+            if (snapshot.hasData) {
+              return Container(
+                width: size.width * .8,
+                height: 356,
+                child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  itemCount: snapshot.data.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 15.0),
+                      child: CardPublication(
+                        width: size.width * .8,
+                        height: size.height / 4.7,
+                        radius: 15.0,
+                        text: Text(
+                            '${snapshot.data[index].user.names} ${snapshot.data[index].user.surnames}',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'RobotoCondensed')),
+                        subtext: snapshot.data[index].createdAt.toString(),
+                        description: snapshot.data[index].description,
+                      ),
+                    );
+                  },
+                ),
+              );
+            } else {
+              return CupertinoActivityIndicator(
+                radius: 15,
+              );
+            }
+          },
+        ),
       ),
     );
   }

@@ -5,9 +5,10 @@ class InputText extends StatefulWidget {
   final Function(String) validator;
   final bool isSecure;
   final TextInputType type;
+  final Color color;
 
   const InputText(
-      {Key key, this.label, this.validator, this.isSecure, this.type})
+      {Key key, this.color, this.label, this.validator, this.isSecure, this.type})
       : super(key: key);
 
   @override
@@ -33,7 +34,7 @@ class _InputTextState extends State<InputText> {
         decoration: InputDecoration(
           labelText: widget.label,
           labelStyle: TextStyle(
-            color: Colors.white,
+            color: widget.color,
           ),
           fillColor: Colors.white,
           focusedBorder: OutlineInputBorder(

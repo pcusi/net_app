@@ -113,6 +113,7 @@ class _SignInPageState extends State<SignInPage> {
                         ),
                         InputText(
                           label: 'Usuario',
+                          color: Color(0xffffffff),
                           isSecure: false,
                           validator: (String text) {
                             _username = text;
@@ -123,6 +124,7 @@ class _SignInPageState extends State<SignInPage> {
                         ),
                         InputText(
                           label: 'Contraseña',
+                          color: Color(0xffffffff),
                           isSecure: true,
                           validator: (String text) {
                             _password = text;
@@ -184,7 +186,6 @@ class _SignInPageState extends State<SignInPage> {
                       ? Center(
                           child: CircularProgressIndicator(
                             backgroundColor: Colors.red,
-                            
                           ),
                         )
                       : Container(),

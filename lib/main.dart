@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:net_app/pages/create_publication.dart';
 import 'package:net_app/pages/login_page.dart';
 import 'package:net_app/pages/main_page.dart';
 import 'package:net_app/pages/my_profile.dart';
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => MeUser(),
+      create: (context) => MeUser(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         initialRoute: '/',
@@ -28,7 +29,8 @@ class MyApp extends StatelessWidget {
           '/login': (BuildContext context) => LoginPage(),
           '/splash': (BuildContext context) => SplashPage(),
           '/users': (BuildContext context) => UsersPage(),
-          '/my-info': (BuildContext context) => MyProfilePage()
+          '/my-info': (BuildContext context) => MyProfilePage(),
+          '/create-publication': (BuildContext context) => CreatePublicationPage()
         },
         home: SplashPage(),
       ),

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:net_app/pages/main_page.dart';
 
 class ProfileContent extends StatefulWidget {
-  ProfileContent({Key key}) : super(key: key);
+  final Widget route;
+  final Widget rowTwo;
+  final Widget rowThree;
+
+  ProfileContent({Key key, this.route, this.rowTwo, this.rowThree})
+      : super(key: key);
 
   @override
   _ProfileContentState createState() => _ProfileContentState();
@@ -29,20 +33,34 @@ class _ProfileContentState extends State<ProfileContent> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.only(left: 32.0),
-              child: GestureDetector(
-                child: IconButton(
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => MainPage()));
-                },
-                icon: Icon(
-                  Icons.arrow_back,
-                  color: Colors.white,
-                  size: 25,
-                ),
-              )),
-            ),
+                padding: const EdgeInsets.only(left: 32.0),
+                child: Row(
+                  children: <Widget>[
+                    GestureDetector(
+                      child: IconButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => widget.route));
+                        },
+                        icon: Icon(
+                          Icons.arrow_back,
+                          color: Colors.white,
+                          size: 25,
+                        ),
+                      ),
+                    ),
+                    widget.rowTwo
+                  ],
+                )),
+            Padding(
+              padding: const EdgeInsets.only(right: 32.0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[widget.rowThree],
+              ),
+            )
           ],
         ),
       ),

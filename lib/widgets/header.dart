@@ -3,6 +3,8 @@ import 'package:net_app/api/session.dart';
 import 'package:net_app/pages/my_profile.dart';
 
 class HeaderWidget extends StatefulWidget {
+
+  
   HeaderWidget({Key key}) : super(key: key);
 
   @override

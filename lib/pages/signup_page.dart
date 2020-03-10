@@ -120,6 +120,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       validator: (String text) {
                         _names = text;
                       },
+                      color: Color(0xffffffff),
                     ),
                     SizedBox(
                       height: 25.0,
@@ -130,6 +131,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       validator: (String text) {
                         _surnames = text;
                       },
+                      color: Color(0xffffffff),
                     ),
                     SizedBox(
                       height: 25.0,
@@ -144,6 +146,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         }
                         return 'El usuario debe tener solo 10 carácteres';
                       },
+                      color: Color(0xffffffff),
                     ),
                     SizedBox(
                       height: 25.0,
@@ -158,6 +161,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         }
                         return 'La contraseña solo debe tener 8 carácteres';
                       },
+                      color: Color(0xffffffff),
                     ),
                     SizedBox(
                       height: 25.0,

@@ -6,6 +6,8 @@ class TextCustomize extends StatefulWidget {
   final String fontFamily;
   final String text;
   final FontWeight fontWeight;
+  final TextOverflow overflow;
+  final bool wrap;
   TextCustomize({
     Key key,
     this.colors,
@@ -13,6 +15,8 @@ class TextCustomize extends StatefulWidget {
     this.fontFamily,
     this.text,
     this.fontWeight,
+    this.overflow,
+    this.wrap
   }) : super(key: key);
 
   @override
@@ -32,6 +36,8 @@ class _TextCustomizeState extends State<TextCustomize> {
           fontFamily: widget.fontFamily,
           fontWeight: widget.fontWeight,
         ),
+        overflow: widget.overflow,
+        softWrap: widget.wrap,
       ),
     );
   }

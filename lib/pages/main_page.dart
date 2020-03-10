@@ -62,7 +62,7 @@ class _MainPageState extends State<MainPage> {
                 //input for a new publication of the user
                 GestureDetector(
                   onTap: () {
-                    print("ESTO ESTÁ FUNCIONANDO!");
+                    Navigator.pushNamed(context, '/create-publication');
                   },
                   child: Container(
                     width: size.width * .8,
@@ -118,7 +118,7 @@ class _MainPageState extends State<MainPage> {
                   ],
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
                 //print in a widget all publications of friends list from the user
                 Container(
