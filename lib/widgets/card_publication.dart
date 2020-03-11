@@ -29,8 +29,6 @@ class _CardPublicationState extends State<CardPublication> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: widget.width,
-      height: widget.height,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(widget.radius),
@@ -81,12 +79,15 @@ class _CardPublicationState extends State<CardPublication> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(
-                        widget.description,
-                        style: TextStyle(
-                          fontFamily: 'RobotoCondensed',
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
+                      Container(
+                        width: 300,
+                        child: Text(
+                          widget.description,
+                          style: TextStyle(
+                            fontFamily: 'RobotoCondensed',
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                       SizedBox(

@@ -88,23 +88,52 @@ class _MyProfilePageState extends State<MyProfilePage> {
                       return Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          TextCustomize(
-                            text: snapshot.data.tagOne +
-                                " | " +
-                                snapshot.data.tagTwo,
-                            colors: Color(0xffffffff),
-                            fontFamily: 'RobotoCondensed',
-                            fontSize: 14,
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 16.0, right: 16.0, top: 28.0),
+                            child: TextCustomize(
+                              text: snapshot.data.tagOne +
+                                  " | " +
+                                  snapshot.data.tagTwo,
+                              colors: Color(0xffffffff),
+                              fontFamily: 'RobotoCondensed',
+                              fontSize: 16,
+                            ),
                           ),
                         ],
                       );
                     } else {
-                      return CupertinoActivityIndicator(
-                        radius: 5.0,
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          TextCustomize(
+                            colors: Colors.white,
+                            text: 'Crear Etiquetas',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 12.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                shape: BoxShape.circle,
+                              ),
+                              child: IconButton(
+                                onPressed: () {
+                                  Navigator.pushNamed(context, '/create-about');
+                                },
+                                icon: Icon(Icons.turned_in),
+                                color: Colors.black,
+                              ),
+                            ),
+                          )
+                        ],
                       );
                     }
                   },
                 ),
+                //space again
                 SizedBox(
                   height: 20.0,
                 ),
@@ -119,7 +148,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
                       BoxShadow(offset: Offset(0, 1), color: Colors.black12)
                     ],
                   ),
-                  //print details
+                  //print details of the user
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
@@ -144,62 +173,72 @@ class _MyProfilePageState extends State<MyProfilePage> {
                     ],
                   ),
                 ),
+                //space ----
                 SizedBox(
                   height: 45.0,
                 ),
-                //about the user
-                Container(
+                //about the user, all description from the user.
+                SizedBox(
                   width: double.infinity,
-                  height: size.height - 330,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(75.0),
+                  height: size.height * .47,
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(75.0),
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            offset: Offset(0, 1),
+                            color: Colors.black12,
+                          )
+                        ]),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 38.0, top: 25.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          TextCustomize(
+                            text: 'Sobre mí',
+                            colors: Color(0xff000000),
+                            fontFamily: 'RobotoCondensed',
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          SizedBox(
+                            height: 20.0,
+                          ),
+                          FutureBuilder<About>(
+                            future: userProfile(),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData) {
+                                return Padding(
+                                  padding: const EdgeInsets.only(right: 35.0),
+                                  child: TextCustomize(
+                                    text: snapshot.data.aboutMe,
+                                    colors: Color(0xff000000),
+                                    fontFamily: 'RobotoCondensed',
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                );
+                              } else {
+                                return Padding(
+                                  padding: const EdgeInsets.only(right: 35.0),
+                                  child: TextCustomize(
+                                    text:
+                                        'Por ahora no tienes ninguna descripción.',
+                                    colors: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18.0,
+                                    fontFamily: 'RobotoCondensed',
+                                  ),
+                                );
+                              }
+                            },
+                          )
+                        ],
                       ),
-                      boxShadow: [
-                        BoxShadow(
-                          offset: Offset(0, 1),
-                          color: Colors.black12,
-                        )
-                      ]),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 38.0, top: 25.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        TextCustomize(
-                          text: 'Sobre mí',
-                          colors: Color(0xff000000),
-                          fontFamily: 'RobotoCondensed',
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        SizedBox(
-                          height: 20.0,
-                        ),
-                        FutureBuilder<About>(
-                          future: userProfile(),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              return Padding(
-                                padding: const EdgeInsets.only(right: 8.0),
-                                child: TextCustomize(
-                                  text: snapshot.data.aboutMe,
-                                  wrap: true,
-                                  colors: Color(0xff000000),
-                                  fontFamily: 'RobotoCondensed',
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              );
-                            } else {
-                              return CupertinoActivityIndicator(
-                                radius: 15.0,
-                              );
-                            }
-                          },
-                        )
-                      ],
                     ),
                   ),
                 ),

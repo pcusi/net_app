@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:net_app/pages/create_about.dart';
 import 'package:net_app/pages/create_publication.dart';
 import 'package:net_app/pages/login_page.dart';
 import 'package:net_app/pages/main_page.dart';
@@ -30,7 +31,8 @@ class MyApp extends StatelessWidget {
           '/splash': (BuildContext context) => SplashPage(),
           '/users': (BuildContext context) => UsersPage(),
           '/my-info': (BuildContext context) => MyProfilePage(),
-          '/create-publication': (BuildContext context) => CreatePublicationPage()
+          '/create-publication': (BuildContext context) => CreatePublicationPage(),
+          '/create-about': (BuildContext context) => CreateAboutPage(),
         },
         home: SplashPage(),
       ),

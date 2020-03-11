@@ -101,11 +101,13 @@ class _CreatePublicationPageState extends State<CreatePublicationPage> {
                 child: Padding(
                     padding: const EdgeInsets.all(32.0),
                     child: TextArea(
+                      padding: 12.0,
                       isSecure: false,
                       hint: '¿Que estás pensando?',
                       validator: (String text) {
                         _description = text;
                       },
+                      lines: 7,
                     )),
               ),
             )

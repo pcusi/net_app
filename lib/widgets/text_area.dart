@@ -6,9 +6,20 @@ class TextArea extends StatefulWidget {
   final bool isSecure;
   final TextInputType type;
   final Color color;
+  final int lines;
+  final String label;
+  final double padding;
 
   const TextArea(
-      {Key key, this.color, this.hint, this.validator, this.isSecure, this.type})
+      {Key key,
+      this.label,
+      this.padding,
+      this.lines,
+      this.color,
+      this.hint,
+      this.validator,
+      this.isSecure,
+      this.type})
       : super(key: key);
 
   @override
@@ -25,16 +36,14 @@ class _TextAreaState extends State<TextArea> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20),
+      padding: EdgeInsets.symmetric(horizontal: widget.padding),
       child: TextFormField(
-        maxLines: 8,
+        maxLines: widget.lines,
         keyboardType: widget.type,
         obscureText: widget.isSecure,
         validator: widget.validator,
         style: style,
-        decoration: InputDecoration.collapsed(
-          hintText: widget.hint
-        ),
+        decoration: InputDecoration.collapsed(hintText: widget.hint,),
       ),
     );
   }

@@ -147,7 +147,7 @@ class Api {
   }
 
   //user biography need 3 parameters first the token of the user, compare the token with the id, if id != to the token, means that description of the users doesn't exists.
-  Future<About> getUserDescription(
+  Future<dynamic> getUserDescription(
       BuildContext context, String token, String id) async {
     //parameters token, id
     try {
@@ -160,7 +160,6 @@ class Api {
         return About.fromJson(
             parsed); //we need parse the user description or biography from the api rest
       }
-      throw PlatformException(code: "201", message: "error /about/:id");
     } on PlatformException catch (e) {
       Dialog.alert(context, title: "ERROR", message: e.message);
       return null;
@@ -175,6 +174,31 @@ class Api {
       final response = await http.post(url,
           body: {"description": description},
           headers: {"Authorization": "Bearer $token"});
+      final parsed = jsonDecode(response.body);
+      if (response.statusCode == 200) {
+        return true; //we need parse the user description or biography from the api rest
+      } else if (response.statusCode == 500) {
+        throw PlatformException(code: "500", message: parsed['message']);
+      }
+      throw PlatformException(code: "201", message: "error /new-publication");
+    } on PlatformException catch (e) {
+      Dialog.alert(context, title: "ERROR", message: e.message);
+      return false;
+    }
+  }
+
+  Future<bool> createAbout(BuildContext context, String token,
+      {@required String tagOne,
+      @required String tagTwo,
+      @required String aboutMe}) async {
+    try {
+      final url = "${Config.url}/about-user";
+
+      final response = await http.post(
+        url,
+        body: {"tag_one": tagOne, "tag_two": tagTwo, "about_me": aboutMe},
+        headers: {"Authorization": "Bearer $token"},
+      );
       final parsed = jsonDecode(response.body);
       if (response.statusCode == 200) {
         return true; //we need parse the user description or biography from the api rest
